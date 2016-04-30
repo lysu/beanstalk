@@ -89,6 +89,18 @@ func TestTubeKick(t *testing.T) {
 	}
 }
 
+func TestTubeKickJob(t *testing.T) {
+	c := NewConn(mock("kick-job 3\r\n", "KICKED\r\n"))
+
+	err := c.KickJob(3)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err = c.Close(); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestTubeStats(t *testing.T) {
 	c := NewConn(mock("stats-tube default\r\n", "OK 10\r\n---\na: ok\n\r\n"))
 
